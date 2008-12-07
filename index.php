@@ -18,15 +18,17 @@
 					<ul>
 						<?php
 						$sitecheck_carbonsilk = new Sitecheck('http://www.carbonsilk.com', 'Carbon Silk');
+						$sitecheck_carbonsilk->notify_email = 'you@example.com';
 						echo '<li>' . $sitecheck_carbonsilk->status_response() . '</li>';
 
-						$sitecheck_ebay = new Sitecheck('http://www.ebay.com', 'eBay');
-						echo '<li>' . $sitecheck_ebay->status_response() . '</li>';
+						$sitecheck_apple = new Sitecheck('http://www.apple.com', 'Apple');
+						$sitecheck_apple->notify_email = 'you@example.com';
+						echo '<li>' . $sitecheck_apple->status_response() . '</li>';
 						?>
 					</ul>
 				</div>
 			</div>
-			<div id="ft">Siteup by <a href="http://www.carbonsilk.com">Carbon Silk</a>. <!-- Source code at <a href="">GitHub</a>--></div>
+			<div id="ft">Siteup by <a href="http://www.carbonsilk.com">Carbon Silk</a>. Source code at <a href="http://github.com/kulor/siteup/tree/master">GitHub</a></div>
 		</div>
 	</body>
 </html>
