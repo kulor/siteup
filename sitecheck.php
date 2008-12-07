@@ -48,6 +48,19 @@ class sitecheck{
 		}
 	}
 	
+	function send_notification($message){
+		if(is_string($this->notify_email) && is_string($message)){
+			$Name = "Siteup Mailer"; //senders name
+			$email = "noreply@" . $_SERVER['SERVER_NAME']; //senders e-mail adress
+			$recipient = $this->notify_email; //recipient
+			$mail_body = $message; //mail body
+			$subject = "Siteup Status Update"; //subject
+			$header = "From: ". $Name . " <" . $email . ">\r\n"; //optional headerfields
+
+			mail($recipient, $subject, $mail_body, $header); //mail command :)			
+		}
+	}
+	
 	function status(){
 		if(200 == $this->http_response_code && $this->validate_title_text()){
 			return true;
@@ -63,8 +76,9 @@ class sitecheck{
 			if(200 == $this->http_response_code){
 				$response = $this->domain . " can be reached but the expected title '{$this->expected_title}' does not match";
 			} else {
-				$response = $this->domain . ' is down';	
+				$response = $this->domain . ' is down';
 			}
+			$this->send_notification($response);
 		}
 		return $response;
 	}
